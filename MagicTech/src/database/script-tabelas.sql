@@ -22,22 +22,20 @@ CREATE TABLE usuario (
 create table baralho (
 	idBaralho INT PRIMARY KEY AUTO_INCREMENT,
 	cor varchar(45),
-        constraint chkcor check (cor in ('preto', 'branco', 'vermelho', 'azul', 'verde')),
-        formato varchar(45),
-        constraint chkformato check (formato in ('commander', 'modern', 'legacy', 'vintage', 'pauper')),
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+	constraint chkcor check (cor in ('preto', 'branco', 'vermelho', 'azul', 'verde')),
+    formato varchar(45),
+	constraint chkformato check (formato in ('commander', 'modern', 'legacy', 'vintage', 'pauper')),
+    nome varchar(45),
+    fk_Usuario int not null,
+	FOREIGN KEY (fk_Usuario) REFERENCES usuario (idUsuario)
 );
 
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
-);
-insert into empresa (razao_social, cnpj) values ('Empresa 1', '00000000000000');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
+create table resultado (
+	idResultado INT AUTO_INCREMENT,
+    derrotas int,
+    vitorias int,
+    fk_baralho int not null,
+    primary key pkcomposta (idResultado, fk_baralho),
+	FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
+
+
