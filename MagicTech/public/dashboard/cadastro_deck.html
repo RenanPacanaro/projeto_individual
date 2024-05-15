@@ -140,14 +140,14 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         formatoServer: formatoVar,
-        coresServer: coresVar
+        coresServer: coresVar,
+        id_UsuarioServer : sessionStorage.ID_USUARIO
       }),
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
           limparFormulario();
           finalizarAguardar();
         } else {

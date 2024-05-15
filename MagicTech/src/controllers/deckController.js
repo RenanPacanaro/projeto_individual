@@ -3,8 +3,8 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var formato = req.body.formatoServer;
-    var cores = req.body.coresServer;
-
+    var cores = req.body.coresServer; 
+    var id_Usuario = req.body.id_UsuarioServer
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("O nome do deck está undefined!");
@@ -15,7 +15,7 @@ function cadastrar(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        deckModel.cadastrar(nome, formato, cores)
+        deckModel.cadastrar(nome, formato, cores, id_Usuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -31,7 +31,8 @@ function cadastrar(req, res) {
                 }
             );
     }
-    module.exports = {
-        cadastrar
-    }
+}
+
+module.exports = {
+    cadastrar
 }
