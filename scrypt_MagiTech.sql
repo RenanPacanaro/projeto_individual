@@ -3,7 +3,7 @@ CREATE DATABASE magitech;
 USE magitech;
 
 CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
+	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
 	email VARCHAR(50),
 	senha VARCHAR(50)
@@ -13,11 +13,9 @@ CREATE TABLE usuario (
 
 create table baralho (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	cor varchar(45),
-	constraint chkcor check (cor in ('preto', 'branco', 'vermelho', 'azul', 'verde')),
+	nome varchar(45),
     formato varchar(45),
-	constraint chkformato check (formato in ('commander', 'modern', 'legacy', 'vintage', 'pauper')),
-    nome varchar(45),
+    cores varchar(45),
     fk_Usuario int not null,
 	FOREIGN KEY (fk_Usuario) REFERENCES usuario (id)
 );
