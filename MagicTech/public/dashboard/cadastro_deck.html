@@ -1,205 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Tempo Real</title>
+  <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTech | Tempo Real</title>
 
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+  <link rel="stylesheet" href="./../css/dashboards.css">
+  <link rel="stylesheet" href="./../css/estilo.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-      <title>AquaTech | Cadastro</title>
-    
-      <link rel="stylesheet" href="./css/estilo.css" />
-      <link rel="icon" href="./assets/icon/favicon2.ico" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" />
-    </head>
-    
-    <body>
-      <!--header inicio-->
-      <div class="header">
-        <div class="container">
-          <h1 class="titulo">AquaTech</h1>
+  <!DOCTYPE html>
+  <html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AquaTech | Cadastro</title>
+
+    <link rel="stylesheet" href="./css/estilo.css" />
+    <link rel="icon" href="./assets/icon/favicon2.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
+
+  <body>
+    <!--header inicio-->
+    <div class="header">
+      <div class="container">
+        <h1 class="titulo">AquaTech</h1>
+      </div>
+    </div>
+    <!--header fim-->
+
+    <div class="login">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
         </div>
       </div>
-      <!--header fim-->
-    
-      <div class="login">
-        <div class="alerta_erro">
-          <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-          </div>
-        </div>
-        <div class="container">
-          <div class="card card-cadastro">
-            <h2>Cadastre seus Decks:</h2>
-            <div class="formulario">
-              <!--
+      <div class="container">
+        <div class="card card-cadastro">
+          <h2>Cadastre seus Decks:</h2>
+          <div class="formulario">
+            <!--
                              Para inserir mais um campo, copie uma das inputs abaixo.
                              Assim que inserir vá para o script abaixo.
                          -->
-              <div class="campo">
-                <span>Nome:</span>
-                <input id="nome_input" type="text" placeholder="Nome do Baralho" />
+            <div class="campo">
+              <span>Nome:</span>
+              <input id="nome_input" type="text" placeholder="Nome do Baralho" />
+            </div>
+            <div class="campo">
+              <span>Formato:</span>
+              <select id="select_formato">
+                <option value="#"></option>
+                <option value="commander">Commander</option>
+                <option value="modern">Modern</option>
+                <option value="pauper">Pauper</option>
+                <option value="legacy">Legacy</option>
+                <option value="vintage">Vintage</option>
+                <option value="pioneer">Pioneer</option>
+                <option value="standard">Standard</option>
+              </select>
+            </div>
+            <div class="campo">
+
+              <h3>Cores:</h3>
+              <div>
+                Preto:<input onclick="chk(this)" type="checkbox" value="preto">
+                Verde:<input onclick="chk(this)" type="checkbox" value="verde">
+                Vermelho:<input onclick="chk(this)" type="checkbox" value="vermelho">
+                Branco:<input onclick="chk(this)" type="checkbox" value="branco">
+                Azul:<input onclick="chk(this)" type="checkbox" value="azul">
+                Incolor:<input onclick="chk(this)" type="checkbox" value="incolor">
               </div>
-              <div class="campo">
-                <span>Formato:</span>
-                <select id="select_formato">
-                  <option value="#"></option>
-                  <option value="commander">Commander</option>
-                  <option value="modern">Modern</option>
-                  <option value="pauper">Pauper</option>
-                  <option value="legacy">Legacy</option>
-                  <option value="vintage">Vintage</option>
-                  <option value="pioneer">Pioneer</option>
-                  <option value="standard">Standard</option>
-                </select>
-              </div>
-              <div class="campo">
-               
-                <h3>Cores:</h3>
-                <div> 
-                Preto:<input onclick="chk_preto()" type="checkbox">
-                Verde:<input onclick="chk_verde()" type="checkbox">
-                Vermelho:<input onclick="chk_vermelho()" type="checkbox">
-                Branco:<input onclick="chk_branco()" type="checkbox">
-                Azul:<input onclick="chk_azul()" type="checkbox">
-                Incolor:<input onclick="chk_incolor()" type="checkbox">
-              </div>
-              </div>
-              <button class="botao" onclick="cadastrar(), cadastrar2()">Cadastrar</button>
-            </div> 
-            <div id="div_erros_login"></div>
+            </div>
+            <button class="botao" onclick="cadastrar()">Cadastrar</button>
           </div>
+          <div id="div_erros_login"></div>
         </div>
       </div>
-    
-</body>
-</html>
-<script>
-  var cores = []
-  var coresVar = ``
-  function chk_preto(){
-  cores.push(`preto`)
-  } 
-  function chk_verde(){
-  cores.push(`verde`)
-  } 
-  function chk_vermelho(){
-  cores.push(`vermelho`)
-  } 
-  function chk_azul(){
-  cores.push(`azul`)
-  } 
-  function chk_branco(){
-  cores.push('branco')
-  } 
-  function chk_incolor(){
-  cores.push(`incolor`)
-  } 
-  var cont_baralho = 0
-  function cadastrar() {
+    </div>
 
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomeVar = nome_input.value;
-    var formatoVar = select_formato.value;
-    if (
-      nomeVar == "" ||
-      formatoVar == "#" ||
-      coresVar == "" 
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+  </body>
 
-    } else {
-      setInterval(sumirMensagem, 5000);
+  </html>
+  <script>
+    var cores = []
+    var coresVar = ``
+    function chk(checkbox) {
+      if (checkbox.checked)
+        cores.push(checkbox.value);
+      else {
+        cores.splice(cores.indexOf(checkbox.value), 1)
+      }
     }
-        // Enviando o valor da nova input
-        fetch("/deck/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        formatoServer: formatoVar,
-        id_UsuarioServer : sessionStorage.ID_USUARIO,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+    var cont_baralho = 0
+    function cadastrar() {
 
-        if (resposta.ok) {
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
+      //Recupere o valor da nova input pelo nome do id
+      // Agora vá para o método fetch logo abaixo
+      var nomeVar = nome_input.value;
+      var formatoVar = select_formato.value;
+      if (
+        nomeVar == "" ||
+        formatoVar == "#" ||
+        coresVar == ""
+      ) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+          "(Mensagem de erro para todos os campos em branco)";
+
+      } else {
+        setInterval(sumirMensagem, 5000);
+      }
+      // Enviando o valor da nova input
+      fetch("/deck/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          formatoServer: formatoVar,
+          id_UsuarioServer: sessionStorage.ID_USUARIO,
+          coresServer: cores,
+        }),
       })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
 
-    return false;
-  }
-function cadastrar2 (){
-    for (var cont = 0; cont < cores.length ;cont ++){
-    var coresVar = cores[cont];
-    cont_baralho ++
-    fetch("/deck/cadastrar2", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        coresServer: coresVar,
-        cont_baralhoServer : cont_baralho
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+          if (resposta.ok) {
+            // limparFormulario(); não definida
+            finalizarAguardar();
 
-        if (resposta.ok) {
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
 
-    return false;
-  }
-}
+      return false;
+    }
 
 
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
+    function sumirMensagem() {
+      cardErro.style.display = "none";
+    }
 
-</script>
+  </script>

@@ -9,10 +9,10 @@ function cadastrar(nome, formato, idUsuario) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function cadastrar2(cores, cont_baralho) {
+function cadastrar2(cores, fk_baralho) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql2);
     var instrucaoSql2 = `
-        INSERT INTO cor (cores, fk_baralho) VALUES ( '${cores}', '${cont_baralho}');
+        INSERT INTO cor (cores, fk_baralho) VALUES ( '${cores}', '${fk_baralho}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql2);
     return database.executar(instrucaoSql2);
