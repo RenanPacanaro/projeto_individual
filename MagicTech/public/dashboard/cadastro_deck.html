@@ -83,7 +83,7 @@
                 Incolor:<input onclick="chk_incolor()" type="checkbox">
               </div>
               </div>
-              <button class="botao" onclick="cadastrar()">Cadastrar</button>
+              <button class="botao" onclick="cadastrar(), cadastrar2()">Cadastrar</button>
             </div> 
             <div id="div_erros_login"></div>
           </div>
@@ -113,13 +113,13 @@
   function chk_incolor(){
   cores.push(`incolor`)
   } 
+  var cont_baralho = 0
   function cadastrar() {
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var formatoVar = select_formato.value;
-    var coresVar = cores;
     if (
       nomeVar == "" ||
       formatoVar == "#" ||
@@ -143,8 +143,7 @@
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         formatoServer: formatoVar,
-        coresServer: coresVar,
-        id_UsuarioServer : sessionStorage.ID_USUARIO
+        id_UsuarioServer : sessionStorage.ID_USUARIO,
       }),
     })
       .then(function (resposta) {
@@ -163,6 +162,40 @@
 
     return false;
   }
+function cadastrar2 (){
+    for (var cont = 0; cont < cores.length ;cont ++){
+    var coresVar = cores[cont];
+    cont_baralho ++
+    fetch("/deck/cadastrar2", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        coresServer: coresVar,
+        cont_baralhoServer : cont_baralho
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+}
+
 
 
   function sumirMensagem() {

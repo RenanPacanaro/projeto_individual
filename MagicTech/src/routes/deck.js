@@ -7,5 +7,8 @@ var deckController = require("../controllers/deckController");
 router.post("/cadastrar", function (req, res) {
     deckController.cadastrar(req, res);
 })
+router.post("/cadastrar2", function (req, res) {
+    deckController.cadastrar2(req, res);
+})
 
 module.exports = router;

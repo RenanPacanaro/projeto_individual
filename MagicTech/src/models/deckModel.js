@@ -1,17 +1,23 @@
 var database = require("../database/config")
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
-function cadastrar(nome, formato, cores, idUsuario) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, formato, cores);
-    
+function cadastrar(nome, formato, idUsuario) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO baralho (nome, formato, cores, fk_Usuario) VALUES ('${nome}', '${formato}', '${cores}', '${idUsuario}');
+        INSERT INTO baralho (nome, formato, fk_Usuario) VALUES ('${nome}', '${formato}', '${idUsuario}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
+function cadastrar2(cores, cont_baralho) {
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    var instrucaoSql2 = `
+        INSERT INTO cor (cores, fk_baralho) VALUES ( '${cores}', '${cont_baralho}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
 module.exports = {
-    cadastrar
+    cadastrar,
+    cadastrar2
 };
