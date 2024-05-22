@@ -1,3 +1,4 @@
+drop database magitech;
 CREATE DATABASE magitech;
 
 USE magitech;
@@ -6,7 +7,7 @@ CREATE TABLE usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(50),
 	email VARCHAR(50),
-    senha VARCHAR(50)
+	senha VARCHAR(50)
 );
 
 /* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
@@ -22,7 +23,8 @@ create table cor (
 idCor int auto_increment,
 cores varchar(45),
 fk_baralho int,
-FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
+primary key pkcomposta (idCor, fk_baralho),
+	FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
 
 create table resultado (
 	idResultado INT AUTO_INCREMENT,
@@ -31,7 +33,9 @@ create table resultado (
     fk_baralho int not null,
     primary key pkcomposta (idResultado, fk_baralho),
 	FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
+
+insert into usuario values
+(default, 'r', 'r@gmail.com', 12345);
 select * from usuario;
 select * from baralho;
 select * from cor;
-drop database magitech;

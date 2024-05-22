@@ -1,3 +1,4 @@
+drop database magitech;
 CREATE DATABASE magitech;
 
 USE magitech;
@@ -19,8 +20,9 @@ create table baralho (
 	FOREIGN KEY (fk_Usuario) REFERENCES usuario (idUsuario)
 );
 create table cor (
-idCor int,
+idCor int auto_increment,
 cores varchar(45),
+fk_baralho int,
 primary key pkcomposta (idCor, fk_baralho),
 	FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
 
@@ -31,5 +33,9 @@ create table resultado (
     fk_baralho int not null,
     primary key pkcomposta (idResultado, fk_baralho),
 	FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
+
+insert into usuario values
+(default, 'r', 'r@gmail.com', 12345);
 select * from usuario;
 select * from baralho;
+select * from cor;

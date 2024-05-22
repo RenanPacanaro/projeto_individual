@@ -191,7 +191,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   height: 450px;
-  width: 100%;
+  width: 50vw;
   align-items: center;
   color: white;
 }
@@ -199,8 +199,7 @@ body {
 .card-aquario {
   margin: 2%;
   min-width: 40%;
-  max-width: 50%;
-  width: fit-content;
+  width: 50vw;
   flex-wrap: wrap;
   display: flex;
   /* text-align: center; */
