@@ -57,6 +57,7 @@ function chamar_baralho(req,res){
 }
     )
 }
+
 // function cadastrar2(req, res) {
 //     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
 //     var cores = req.body.coresServer;
@@ -86,6 +87,7 @@ function chamar_baralho(req,res){
 // }
 module.exports = {
     cadastrar,
-    chamar_baralho
+    chamar_baralho,
+    
     // cadastrar2
 }

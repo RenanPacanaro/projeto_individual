@@ -7,7 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Tempo Real</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <style>
+            canvas {
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+        </style>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
@@ -20,7 +29,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="chamar()">
+<body onload="chamar(), exibirBaralhos()">
 
     <div class="janela">
 
@@ -54,7 +63,7 @@
 
         </div>
 
-       
+       <div id="div_graficos"></div>
 
 </body>
 
@@ -63,24 +72,6 @@
     var formato_grafico = [];
     var nome_grafico = [];
     var cores_grafico = [];
-
-    function exibirBaralhos() {
-        JSON.parse(sessionStorage.ID_USUARIO).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
-    }
 function chamar(){
     fetch("/deck/chamar_baralho", {
             method: "POST",
@@ -124,8 +115,40 @@ function chamar(){
           console.log(`#ERRO: ${resposta}`);
         });
 
-      return false;
+      return false; 
+}
+
+function exibirBaralhos() {
+    var div_conteudo = ``;
+    for (var cont = 0; cont < baralho_grafico.length; cont++){
+        alert(cont);
+        div_conteudo += `
+        <section>
+            <canvas id='grafico${cont}'></canvas>
+        </section>`;
+
+        var grafico_canvas = document.getElementById(`grafico${cont}`).getContext('2d');
+        grafico_canvas.canvas.parentNode.style.width = '500px';
+        grafico_canvas.canvas.parentNode.style.height = '500px';
+        grafico_canvas.canvas.width = 1;
+        grafico_canvas.canvas.height = 1;
+
+        var grafico_baralho = new Chart (
+            grafico_canvas, {
+                type: 'pie',
+                data:{
+                    labels: ['Vitorias', 'Derrotas'],
+                    datasets: [{
+                        data: [50,50],
+                        backgroundColor:[
+                            'blue', 'red'
+                        ]
+                    }]
+                }
+            }
+        )
     }
+}
      
 
 </script>
