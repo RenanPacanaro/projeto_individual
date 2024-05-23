@@ -20,7 +20,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="chamar()">
 
     <div class="janela">
 
@@ -59,6 +59,7 @@
 </body>
 
 <script>
+    var baralho_grafico = [];
 
     function exibirBaralhos() {
         JSON.parse(sessionStorage.ID_USUARIO).forEach(item => {
@@ -77,6 +78,46 @@
                     `
         });
     }
+function chamar(){
+    fetch("/deck/chamar_baralho", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_UsuarioServer: sessionStorage.ID_USUARIO
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    console.log(json.resultadoChamar_baralho[0].idBaralho)
+                    for (var cont = 0; cont <= json.resultadoChamar_baralho.length - 1; cont ++){
+                    var baralho_lista = json.resultadoChamar_baralho[cont];
+                    var baralho = baralho_lista.idBaralho;
+                
+                    baralho_grafico.push(baralho);
+                }
+                    
+                });
+            finalizarAguardar();
+
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      return false;
+    }
+     
 
 </script>
 

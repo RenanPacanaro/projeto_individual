@@ -52,8 +52,8 @@ function chamar_baralho(req,res){
         function (resultadoChamar_baralho) {
         
             res.json({
-                idBaralho: resultadoChamar_baralho.idBaralho}
-);
+                resultadoChamar_baralho
+            });
 }
     )
 }
