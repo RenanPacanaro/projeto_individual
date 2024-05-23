@@ -60,6 +60,9 @@
 
 <script>
     var baralho_grafico = [];
+    var formato_grafico = [];
+    var nome_grafico = [];
+    var cores_grafico = [];
 
     function exibirBaralhos() {
         JSON.parse(sessionStorage.ID_USUARIO).forEach(item => {
@@ -100,8 +103,14 @@ function chamar(){
                     for (var cont = 0; cont <= json.resultadoChamar_baralho.length - 1; cont ++){
                     var baralho_lista = json.resultadoChamar_baralho[cont];
                     var baralho = baralho_lista.idBaralho;
-                
+                    var nome = baralho_lista.nome;
+                    var formato = baralho_lista.formato;
+                    var cores = baralho_lista.cores;
                     baralho_grafico.push(baralho);
+                    nome_grafico.push(nome)
+                    formato_grafico.push(formato)
+                    cores_grafico.push(cores)
+
                 }
                     
                 });
