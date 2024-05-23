@@ -1,100 +1,137 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+  <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaTech | Tempo Real</title>
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+  <link rel="stylesheet" href="./../css/dashboards.css">
+  <link rel="stylesheet" href="./../css/estilo.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), atualizarFeed()" style="background-color: #161618;">
+<body>
+  <!DOCTYPE html>
+  <html lang="pt-br">
+    
 
-    <div class="janela">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>AquaTech | Cadastro</title>
 
-        <div class="header-left">
+    <link rel="stylesheet" href="./css/estilo.css" />
+    <link rel="icon" href="./assets/icon/favicon2.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
 
-            <h1>AquaTech</h1>
+  <body>
+    <!--header inicio-->
+    <div class="header">
+      <div class="container">
+        <h1 class="titulo">AquaTech</h1>
+      </div>
+    </div>
+    <!--header fim-->
 
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./dashboard.html">
-                    <h3>Gráficos</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
+    <div class="login">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
         </div>
-
-        <div class="dash-right">
-
-
-            <div class="avisos">
-                <div id="alerta">
-                </div>
-                <div class="container">
-                    <h1>Publicar um aviso</h1>
-                    <div class="div-form">
-                        <form id="form_postagem" method="post" onsubmit="return publicar()">
-                            <label>
-                                Título:
-                                <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
-                            </label>
-                            <br>
-                            <br>
-                            <label>
-                                Descrição (máximo de 250 caracteres):
-                                <br>
-                                <textarea name="descricao" id="textarea_descricao" maxlength="250" rows="5"></textarea>
-                            </label>
-                            <br>
-                            <br>
-                            <button>Enviar</button>
-                        </form>
-                    </div>
-                    <h1>Mural de Avisos</h1>
-                    <div class="div-results">
-                        <div id="feed_container" class="feed-container">
-                        </div>
-                    </div>
-                </div>
+      </div>
+      <div class="container">
+        
+          <!-- <body onload="validarSessao()"> -->
+      
+          <div class="janela">
+      
+      
+              <div class="header-left">
+      
+                  <h1>AquaTech</h1>
+      
+                  <div class="hello">
+                      <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                  </div>
+      
+                  <div class="btn-nav-white">
+                      <a href="./baralhos.html">
+                          <h3>Baralhos</h3>
+                      </a>
+                  </div>
+      
+                  <div class="btn-nav-white">
+                      <a href="./cadastro_deck.html">
+                          <h3>Cadastrar</h3>
+                      </a>
+                  </div>
+      
+                  <div class="btn-nav-white">
+                      <a href="./resultado.html">
+                          <h3>Resultados</h3>
+                      </a>
+                  </div>
+      
+                  <div class="btn-logout" onclick="limparSessao()">
+                      <h3>Sair</h3>
+                  </div>
+      
+              </div>
+      
+        <div class="card card-cadastro">
+          <h2>Cadastre seus Decks:</h2>
+          <div class="formulario">
+            <!--
+                             Para inserir mais um campo, copie uma das inputs abaixo.
+                             Assim que inserir vá para o script abaixo.
+                         -->
+            <div class="campo">
+              <span>Nome:</span>
+              <input id="nome_input" type="text" placeholder="Nome do Baralho" />
             </div>
+            <div class="campo">
+              <span>Formato:</span>
+              <select id="select_formato">
+                <option value="#"></option>
+                <option value="commander">Commander</option>
+                <option value="modern">Modern</option>
+                <option value="pauper">Pauper</option>
+                <option value="legacy">Legacy</option>
+                <option value="vintage">Vintage</option>
+                <option value="pioneer">Pioneer</option>
+                <option value="standard">Standard</option>
+              </select>
+            </div>
+            <div class="campo">
+
+              <h3>Cores:</h3>
+              <div>
+                Preto:<input onclick="chk(this)" type="checkbox" value="preto">
+                Verde:<input onclick="chk(this)" type="checkbox" value="verde">
+                Vermelho:<input onclick="chk(this)" type="checkbox" value="vermelho">
+                Branco:<input onclick="chk(this)" type="checkbox" value="branco">
+                Azul:<input onclick="chk(this)" type="checkbox" value="azul">
+                Incolor:<input onclick="chk(this)" type="checkbox" value="incolor">
+              </div>
+            </div>
+            <button class="botao" onclick="cadastrar()">Cadastrar</button>
+          </div>
+          <div id="div_erros_login"></div>
         </div>
+      </div>
     </div>
 
-
-
-
-</body>
+  </body>
 
 </html>
 
@@ -126,7 +163,7 @@
 
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/mural.html";
+                window.location = "/dashboard/resultado.html";
                 limparFormulario();
                 finalizarAguardar();
             } else if (resposta.status == 404) {
@@ -162,7 +199,7 @@
 
             if (resposta.ok) {
                 window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
+                window.location = "/dashboard/resultado.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {

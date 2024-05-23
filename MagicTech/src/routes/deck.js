@@ -10,5 +10,8 @@ router.post("/cadastrar", function (req, res) {
 router.post("/cadastrar2", function (req, res) {
     deckController.cadastrar2(req, res);
 })
+router.post("/chamar_baralho", function (req, res) {
+    deckController.chamar_baralho(req, res);
+});
 
 module.exports = router;

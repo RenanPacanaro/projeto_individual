@@ -19,7 +19,6 @@ function cadastrar(req, res) {
                     for (var cont = 0; cont < cores.length; cont++) {
                         console.log("for: ", cont);
                         var coresVar = cores[cont];
-                        
                         deckModel.cadastrar2(coresVar, resultado.insertId)
                         .catch(
                             function (erro) {
@@ -45,6 +44,17 @@ function cadastrar(req, res) {
                 }
             );
     }
+}
+function chamar_baralho(req,res){
+    var id_Usuario = req.body.id_UsuarioServer
+    deckModel.chamar_baralho(id_Usuario)
+    .then(
+        function (resultadoChamar_baralho) {
+            res.json({
+                idBaralho: resultadoChamar_baralho
+    });
+}
+    )
 }
 // function cadastrar2(req, res) {
 //     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
@@ -73,8 +83,8 @@ function cadastrar(req, res) {
 //             );
 //     }
 // }
-
 module.exports = {
     cadastrar,
+    chamar_baralho
     // cadastrar2
 }

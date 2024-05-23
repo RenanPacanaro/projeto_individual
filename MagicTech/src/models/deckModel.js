@@ -17,7 +17,16 @@ function cadastrar2(cores, fk_baralho) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql2);
     return database.executar(instrucaoSql2);
 }
+function chamar_baralho(idUsuario){
+    console.log("Executando a instrução SQL: \n" + instrucaoSql3);
+    var instrucaoSql3 =  `
+    SELECT idBaralho FROM baralho join usuario on baralho.fk_usuario = usuario.idUsuario WHERE idUsuario = ${idUsuario};
+`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql3);
+    return database.executar(instrucaoSql3);
+}
 module.exports = {
     cadastrar,
-    cadastrar2
+    cadastrar2,
+    chamar_baralho
 };
