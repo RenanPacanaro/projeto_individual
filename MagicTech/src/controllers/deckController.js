@@ -50,9 +50,10 @@ function chamar_baralho(req,res){
     deckModel.chamar_baralho(id_Usuario)
     .then(
         function (resultadoChamar_baralho) {
+        
             res.json({
-                idBaralho: resultadoChamar_baralho
-    });
+                idBaralho: resultadoChamar_baralho.idBaralho}
+);
 }
     )
 }
