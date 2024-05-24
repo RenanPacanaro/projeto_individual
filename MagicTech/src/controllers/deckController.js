@@ -64,6 +64,7 @@ function cadastrar_resultado(req, res) {
     var derrotas = req.body.derrotasServer;
     var empates = req.body.empatesServer;
     var idBaralho = req.body.idBaralhoServer;
+    console.log(req.body);
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("O nome do deck está undefined!");
@@ -87,37 +88,23 @@ function cadastrar_resultado(req, res) {
             );
     }
 }
-// function cadastrar2(req, res) {
-//     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-//     var cores = req.body.coresServer;
-//     var cont_baralho = req.body.cont_baralhoServer;
-//     // Faça as validações dos valores
-//     if (cores == undefined) {
-//         res.status(400).send("As cores do deck estão undefined!");
-//     } else {
-
-//         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-//         deckModel.cadastrar2(cores, cont_baralho)
-//             .then(
-//                 function (resultado) {
-//                     res.json(resultado);
-//                 }
-//             ).catch(
-//                 function (erro) {
-//                     console.log(erro);
-//                     console.log(
-//                         "\nHouve um erro ao realizar o cadastro! Erro: ",
-//                         erro.sqlMessage
-//                     );
-//                     res.status(500).json(erro.sqlMessage);
-//                 }
-//             );
-//     }
-// }
+function chamar_resultado(req,res){
+    var id_Usuario = req.body.id_UsuarioServer
+    deckModel.chamar_resultado(id_Usuario)
+    .then(
+        function (resultadoChamar_resultado) {
+        
+            res.json({
+                resultadoChamar_resultado
+            });
+}
+    )
+}
 module.exports = {
     cadastrar,
     chamar_baralho,
-    cadastrar_resultado
+    cadastrar_resultado,
+    chamar_resultado
     
     // cadastrar2
 }

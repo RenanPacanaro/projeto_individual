@@ -16,5 +16,8 @@ router.post("/chamar_baralho", function (req, res) {
 router.post("/cadastrar_resultado", function (req, res) {
     deckController.cadastrar_resultado(req, res);
 });
+router.post("/chamar_resultado", function (req, res) {
+    deckController.chamar_resultado(req, res);
+});
 
 module.exports = router;

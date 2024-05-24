@@ -17,186 +17,208 @@
     rel="stylesheet">
 </head>
 
-  <body onload="chamar(), timeout">
-    <!--header inicio-->
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
+<body onload="chamar(),chamar_resultado(), timeout">
+  <!--header inicio-->
+  <div class="header">
+    <div class="container">
+      <h1 class="titulo">AquaTech</h1>
+    </div>
+  </div>
+  <!--header fim-->
+
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
       </div>
     </div>
-    <!--header fim-->
+    <div class="container">
 
-    <div class="login">
-      <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-          <span id="mensagem_erro"></span>
+      <!-- <body onload="validarSessao()"> -->
+
+      <div class="janela">
+
+
+        <div class="header-left">
+
+          <h1>AquaTech</h1>
+
+          <div class="hello">
+            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+          </div>
+
+          <div class="btn-nav-white">
+            <a href="./baralhos.html">
+              <h3>Baralhos</h3>
+            </a>
+          </div>
+
+          <div class="btn-nav-white">
+            <a href="./cadastro_deck.html">
+              <h3>Cadastrar</h3>
+            </a>
+          </div>
+
+          <div class="btn-nav-white">
+            <a href="./resultado.html">
+              <h3>Resultados</h3>
+            </a>
+          </div>
+
+          <div class="btn-logout" onclick="limparSessao()">
+            <h3>Sair</h3>
+          </div>
+
         </div>
-      </div>
-      <div class="container">
-        
-          <!-- <body onload="validarSessao()"> -->
-      
-          <div class="janela">
-      
-      
-              <div class="header-left">
-      
-                  <h1>AquaTech</h1>
-      
-                  <div class="hello">
-                      <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-                  </div>
-      
-                  <div class="btn-nav-white">
-                      <a href="./baralhos.html">
-                          <h3>Baralhos</h3>
-                      </a>
-                  </div>
-      
-                  <div class="btn-nav-white">
-                      <a href="./cadastro_deck.html">
-                          <h3>Cadastrar</h3>
-                      </a>
-                  </div>
-      
-                  <div class="btn-nav-white">
-                      <a href="./resultado.html">
-                          <h3>Resultados</h3>
-                      </a>
-                  </div>
-      
-                  <div class="btn-logout" onclick="limparSessao()">
-                      <h3>Sair</h3>
-                  </div>
-      
-              </div>
-      
+
         <div class="card2">
-            <h2>Digite qual baralho quer adicionar os resultados:</h2>
+          <h2>Digite qual baralho quer adicionar os resultados:</h2>
           <div class="formulario">
             <div class="campo">
-                <div class="resultado_deck"></div>
-                <div id="div_select"></div>
-              </div>
-              <div class="campo">
-                <span>Nome:</span>
-                <input id="nome_input" type="text" placeholder="Nome do Baralho" />
-              </div>
-              <div class="campo">
-                <span>Vitorias:</span>
-                <input id="vitorias_input" type="number" placeholder="Numero de vitorias" />
-              </div>
-              <div class="campo">
-                <span>Derrotas:</span>
-                <input id="derrotas_input" type="number" placeholder="Numero de derrotas" />
-              </div>
-              <div class="campo">
-                <span>Empates:</span>
-                <input id="empate_input" type="text" placeholder="Numero de empates" />
-              </div>
+              <div class="resultado_deck"></div>
+              <div id="div_select"></div>
             </div>
-            <button class="botao2" onclick="cadastrar_resultado()">Cadastrar Resultado</button>
+            <div class="campo">
+              <span>Nome:</span>
+              <input id="nome_input" type="text" placeholder="Nome do Baralho" />
+            </div>
+            <div class="campo">
+              <span>Vitorias:</span>
+              <input id="vitorias_input" type="number" placeholder="Numero de vitorias" />
+            </div>
+            <div class="campo">
+              <span>Derrotas:</span>
+              <input id="derrotas_input" type="number" placeholder="Numero de derrotas" />
+            </div>
+            <div class="campo">
+              <span>Empates:</span>
+              <input id="empate_input" type="text" placeholder="Numero de empates" />
+            </div>
           </div>
-          <div id="div_erros_login"></div>
+          <button class="botao2" onclick="cadastrar_resultado()">Cadastrar Resultado</button>
         </div>
+        <div id="div_erros_login"></div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 
 </html>
 
 <script>
-    var baralho_grafico = [];
-    var formato_grafico = [];
-    var nome_grafico = [];
-    var cores_grafico = [];
-    function chamar(){
+  var baralho_grafico = [];
+  var formato_grafico = [];
+  var nome_grafico = [];
+  var cores_grafico = [];
+  var vitorias_grafico = [];
+  var derrotas_grafico = [];
+  var empates_grafico = [];
+  function chamar() {
     fetch("/deck/chamar_baralho", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id_UsuarioServer: sessionStorage.ID_USUARIO
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id_UsuarioServer: sessionStorage.ID_USUARIO
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
 
-            if (resposta.ok) {
-                console.log(resposta);
+      if (resposta.ok) {
+        console.log(resposta);
 
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    console.log(json.resultadoChamar_baralho[0].idBaralho)
-                    for (var cont = 0; cont <= json.resultadoChamar_baralho.length - 1; cont ++){
-                    var baralho_lista = json.resultadoChamar_baralho[cont];
-                    var baralho = baralho_lista.idBaralho;
-                    var nome = baralho_lista.nome;
-                    var formato = baralho_lista.formato;
-                    var cores = baralho_lista.cores;
-                    baralho_grafico.push(baralho);
-                    nome_grafico.push(nome)
-                    formato_grafico.push(formato)
-                    cores_grafico.push(cores)
-                }
-                    
-                });
-            finalizarAguardar();
-
-          } else {
-            throw "Houve um erro ao tentar realizar o cadastro!";
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          console.log(json.resultadoChamar_baralho[0].idBaralho)
+          for (var cont = 0; cont <= json.resultadoChamar_baralho.length - 1; cont++) {
+            var baralho_lista = json.resultadoChamar_baralho[cont];
+            var baralho = baralho_lista.idBaralho;
+            var nome = baralho_lista.nome;
+            var formato = baralho_lista.formato;
+            var cores = baralho_lista.cores;
+            baralho_grafico.push(baralho);
+            nome_grafico.push(nome)
+            formato_grafico.push(formato)
+            cores_grafico.push(cores)
           }
-        })
-        .catch(function (resposta) {
-          console.log(`#ERRO: ${resposta}`);
-        });
 
-      return false; 
-}
-var timeout = setTimeout(function criar_select(){ 
-   if (baralho_grafico.length == 0){
-    div_select.innerHTML = `<span>Nenhum baralho cadastrado</span>`
-   }else{
-   for(var cont = 0; cont < baralho_grafico.length; cont ++){
-   console.log('estou no for')
-   var nome_deck = nome_grafico[cont]
-   var formato = formato_grafico[cont]
-    div_select.innerHTML += `
+        });
+        finalizarAguardar();
+
+      } else {
+        throw "Houve um erro ao tentar realizar o cadastro!";
+      }
+    })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+  var timeout = setTimeout(function criar_select() {
+    if (baralho_grafico.length == 0) {
+      div_select.innerHTML = `<span>Nenhum baralho cadastrado</span>`
+    } else {
+      for (var cont = 0; cont < baralho_grafico.length; cont++) {
+        console.log('estou no for')
+        var nome_deck = nome_grafico[cont]
+        var formato = formato_grafico[cont]
+        div_select.innerHTML += `
     <span>Baralho: ${cont + 1} Nome: ${nome_deck} Formato: ${formato} </span> <br>
    `
-   }
-   }
-}
-   ,200)
+      }
+    }
+  }
+    , 200)
 
 
-  function cadastrar_resultado(){
+  function cadastrar_resultado() {
     //validações:
     var metrica_nome1 = 0
     var metrica_nome2 = 0
     var idBaralho = ``
     var nome = nome_input.value
-    var vitorias = vitorias_input.value
-    var derrotas = derrotas_input.value
-    var empates = empate_input.value
+    var vitorias_corretas = 0
+    var derrotas_corretas = 0
+    var empates_corretos = 0
+    var vitorias = Number(vitorias_input.value)
+    var derrotas = Number(derrotas_input.value)
+    var empates = Number(empate_input.value)
     var baralho_tamanho = baralho_grafico.length
-    for (cont = 0; cont < baralho_tamanho; cont ++){
-    var nome_correto = nome_grafico[cont]
-    if (nome != nome_correto){
-    metrica_nome1 = 1
+    for (cont = 0; cont <= baralho_tamanho; cont++) {
+      var nome_correto = nome_grafico[cont]
+      if (nome != nome_correto) {
+        metrica_nome1 = 1
+      }
+      if (nome == nome_correto) {
+        metrica_nome2 = 1
+        idBaralho = baralho_grafico[cont]
+        vitorias_corretas = Number(vitorias_grafico[cont])
+        derrotas_corretas = Number(derrotas_grafico[cont])
+        empates_corretos = Number(empates_grafico[cont])
+      }
     }
-    if (nome == nome_correto){
-    metrica_nome2 = 1
-    idBaralho = baralho_grafico[cont]
-    }
-}
     if (metrica_nome1 != metrica_nome2) {
-    alert('O deck não existe')
-    }else if(vitorias < 0 || derrotas < 0 || empates < 0){
-    alert('Vitorias, derrotas ou empates não podem ser negativos')
-    }else{
-        fetch("/deck/cadastrar_resultado", {
+      alert('O deck não existe')
+    } else if (vitorias < 0 || derrotas < 0 || empates < 0) {
+      alert('Vitorias, derrotas ou empates não podem ser negativos')
+    } else {
+      var vitorias_enviar = vitorias + vitorias_corretas
+      var derrotas_enviar = derrotas + derrotas_corretas
+      var empates_enviar = empates + empates_corretos
+
+      console.log(vitorias);
+      console.log(derrotas);
+      console.log(empates);
+      console.log(vitorias_corretas);
+      console.log(derrotas_corretas);
+      console.log(empates_corretos);
+      console.log(vitorias_enviar);
+      console.log(derrotas_enviar);
+      console.log(empates_enviar);
+      fetch("/deck/cadastrar_resultado", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -205,14 +227,57 @@ var timeout = setTimeout(function criar_select(){
           // crie um atributo que recebe o valor recuperado aqui
           // Agora vá para o arquivo routes/usuario.js
           nomeServer: nome,
-          vitoriasServer: vitorias,
-          derrotasServer: derrotas,
-          empatesServer: empates,
+          vitoriasServer: vitorias_enviar,
+          derrotasServer: derrotas_enviar,
+          empatesServer: empates_enviar,
           idBaralhoServer: idBaralho,
         }),
       })
-      setTimeout (chamar, 200)
+      setTimeout(chamar, 200)
     }
-    }
-  
+  }
+
+  function chamar_resultado() {
+    fetch("/deck/chamar_resultado", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id_UsuarioServer: sessionStorage.ID_USUARIO
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          console.log(json.resultadoChamar_resultado[0])
+          for (var cont = 0; cont <= json.resultadoChamar_resultado.length - 1; cont++) {
+            var resultado_lista = json.resultadoChamar_resultado[cont];
+            var vitorias = resultado_lista.vitorias;
+            var derrotas = resultado_lista.derrotas;
+            var empates = resultado_lista.empates;
+            vitorias_grafico.push(vitorias);
+            derrotas_grafico.push(derrotas)
+            empates_grafico.push(empates)
+          }
+
+        });
+        finalizarAguardar();
+
+      } else {
+        throw "Houve um erro ao tentar realizar o cadastro!";
+      }
+    })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+
 </script>

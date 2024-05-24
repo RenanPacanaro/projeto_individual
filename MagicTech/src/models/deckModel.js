@@ -16,24 +16,33 @@ function cadastrar2(cores, fk_baralho) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql2);
     return database.executar(instrucaoSql2);
 }
-function chamar_baralho(idUsuario){
+function chamar_baralho(idUsuario) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql3);
-    var instrucaoSql3 =  `
+    var instrucaoSql3 = `
     SELECT baralho.idBaralho, baralho.nome, baralho.formato FROM baralho join usuario on baralho.fk_usuario = usuario.idUsuario WHERE idUsuario = ${idUsuario};
 `;
     return database.executar(instrucaoSql3);
 }
-
-function cadastrar_resultado(vitorias, derrotas, empates, idBaralho){
+function chamar_resultado(idUsuario) {
+    console.log("Executando a instrução SQL: \n" + instrucaoSql4);
     var instrucaoSql4 = `
+    select idBaralho, max(vitorias) as vitorias, max(derrotas) as derrotas, max(empates) as empates from resultado join baralho on resultado.fk_baralho = baralho.idBaralho 
+    WHERE baralho.fk_Usuario = ${idUsuario} group by idBaralho;
+`;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql4);
+    return database.executar(instrucaoSql4);
+}
+function cadastrar_resultado(vitorias, derrotas, empates, idBaralho) {
+    var instrucaoSql5 = `
     INSERT INTO resultado (vitorias, derrotas, empates, fk_baralho ) VALUES ('${vitorias}', '${derrotas}', '${empates}', '${idBaralho}');
 `;
-console.log("Executando a instrução SQL: \n" + instrucaoSql4);
-return database.executar(instrucaoSql4);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql5);
+    return database.executar(instrucaoSql5);
 }
 module.exports = {
     cadastrar,
     cadastrar2,
     chamar_baralho,
-    cadastrar_resultado
+    cadastrar_resultado,
+    chamar_resultado
 };
