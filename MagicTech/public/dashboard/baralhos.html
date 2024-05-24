@@ -62,8 +62,8 @@
             </div>
 
         </div>
+        <div id="div_graficos"></div>
 
-       <div id="div_graficos"></div>
 
 </body>
 
@@ -120,12 +120,11 @@ var baralho_grafico = [];
 }
 
 var timeout = setTimeout(function exibirBaralhos() {
-    var div_conteudo = ``;
     console.log('entrei na funcao')
     for (var cont = 1; cont < baralho_grafico.length + 1; cont++){
         console.log(`${cont}`)
         alert(cont);
-        div_conteudo.innerHTML += `
+        div_graficos.innerHTML += `
         <section>
             <canvas id='grafico${cont}'></canvas>
         </section>`;
