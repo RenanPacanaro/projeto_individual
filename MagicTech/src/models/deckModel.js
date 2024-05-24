@@ -24,8 +24,16 @@ function chamar_baralho(idUsuario){
     return database.executar(instrucaoSql3);
 }
 
+function cadastrar_resultado(vitorias, derrotas, empates, idBaralho){
+    var instrucaoSql4 = `
+    INSERT INTO resultado (vitorias, derrotas, empates, fk_baralho ) VALUES ('${vitorias}', '${derrotas}', '${empates}', '${idBaralho}');
+`;
+console.log("Executando a instrução SQL: \n" + instrucaoSql4);
+return database.executar(instrucaoSql4);
+}
 module.exports = {
     cadastrar,
     cadastrar2,
-    chamar_baralho
+    chamar_baralho,
+    cadastrar_resultado
 };

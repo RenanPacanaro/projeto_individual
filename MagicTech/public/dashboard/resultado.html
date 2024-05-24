@@ -17,24 +17,7 @@
     rel="stylesheet">
 </head>
 
-<body>
-  <!DOCTYPE html>
-  <html lang="pt-br">
-    
-
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>AquaTech | Cadastro</title>
-
-    <link rel="stylesheet" href="./css/estilo.css" />
-    <link rel="icon" href="./assets/icon/favicon2.ico" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-  </head>
-
-  <body>
+  <body onload="chamar(), timeout">
     <!--header inicio-->
     <div class="header">
       <div class="container">
@@ -88,200 +71,148 @@
       
               </div>
       
-        <div class="card card-cadastro">
-          <h2>Cadastre seus Decks:</h2>
+        <div class="card2">
+            <h2>Digite qual baralho quer adicionar os resultados:</h2>
           <div class="formulario">
-            <!--
-                             Para inserir mais um campo, copie uma das inputs abaixo.
-                             Assim que inserir vá para o script abaixo.
-                         -->
             <div class="campo">
-              <span>Nome:</span>
-              <input id="nome_input" type="text" placeholder="Nome do Baralho" />
-            </div>
-            <div class="campo">
-              <span>Formato:</span>
-              <select id="select_formato">
-                <option value="#"></option>
-                <option value="commander">Commander</option>
-                <option value="modern">Modern</option>
-                <option value="pauper">Pauper</option>
-                <option value="legacy">Legacy</option>
-                <option value="vintage">Vintage</option>
-                <option value="pioneer">Pioneer</option>
-                <option value="standard">Standard</option>
-              </select>
-            </div>
-            <div class="campo">
-
-              <h3>Cores:</h3>
-              <div>
-                Preto:<input onclick="chk(this)" type="checkbox" value="preto">
-                Verde:<input onclick="chk(this)" type="checkbox" value="verde">
-                Vermelho:<input onclick="chk(this)" type="checkbox" value="vermelho">
-                Branco:<input onclick="chk(this)" type="checkbox" value="branco">
-                Azul:<input onclick="chk(this)" type="checkbox" value="azul">
-                Incolor:<input onclick="chk(this)" type="checkbox" value="incolor">
+                <div class="resultado_deck"></div>
+                <div id="div_select"></div>
+              </div>
+              <div class="campo">
+                <span>Nome:</span>
+                <input id="nome_input" type="text" placeholder="Nome do Baralho" />
+              </div>
+              <div class="campo">
+                <span>Vitorias:</span>
+                <input id="vitorias_input" type="number" placeholder="Numero de vitorias" />
+              </div>
+              <div class="campo">
+                <span>Derrotas:</span>
+                <input id="derrotas_input" type="number" placeholder="Numero de derrotas" />
+              </div>
+              <div class="campo">
+                <span>Empates:</span>
+                <input id="empate_input" type="text" placeholder="Numero de empates" />
               </div>
             </div>
-            <button class="botao" onclick="cadastrar()">Cadastrar</button>
+            <button class="botao2" onclick="cadastrar_resultado()">Cadastrar Resultado</button>
           </div>
           <div id="div_erros_login"></div>
         </div>
       </div>
     </div>
-
   </body>
 
 </html>
 
 <script>
-    
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-    function limparFormulario() {
-        document.getElementById("form_postagem").reset();
-    }
-
-    function publicar() {
-        var idUsuario = sessionStorage.ID_USUARIO;
-
-        var corpo = {
-            titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
-        }
-
-        fetch(`/avisos/publicar/${idUsuario}`, {
-            method: "post",
+    var baralho_grafico = [];
+    var formato_grafico = [];
+    var nome_grafico = [];
+    var cores_grafico = [];
+    function chamar(){
+    fetch("/deck/chamar_baralho", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(corpo)
+            body: JSON.stringify({
+                id_UsuarioServer: sessionStorage.ID_USUARIO
+            })
         }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/resultado.html";
-                limparFormulario();
-                finalizarAguardar();
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
-        return false;
-
-    }
-
-    function editar(idAviso) {
-        sessionStorage.ID_POSTAGEM_EDITANDO = idAviso;
-        console.log("cliquei em editar - " + idAviso);
-        window.alert("Você será redirecionado à página de edição do aviso de id número: " + idAviso);
-        window.location = "/dashboard/edicao-aviso.html"
-
-    }
-
-    function deletar(idAviso) {
-        console.log("Criar função de apagar post escolhido - ID" + idAviso);
-        fetch(`/avisos/deletar/${idAviso}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
-                window.alert("Post deletado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/resultado.html"
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-    }
+                console.log(resposta);
 
-    function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
-                    throw "Nenhum resultado encontrado!!";
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    console.log(json.resultadoChamar_baralho[0].idBaralho)
+                    for (var cont = 0; cont <= json.resultadoChamar_baralho.length - 1; cont ++){
+                    var baralho_lista = json.resultadoChamar_baralho[cont];
+                    var baralho = baralho_lista.idBaralho;
+                    var nome = baralho_lista.nome;
+                    var formato = baralho_lista.formato;
+                    var cores = baralho_lista.cores;
+                    baralho_grafico.push(baralho);
+                    nome_grafico.push(nome)
+                    formato_grafico.push(formato)
+                    cores_grafico.push(cores)
                 }
-
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
-                    for (let i = 0; i < resposta.length; i++) {
-                        var publicacao = resposta[i];
-
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
-                        var spanTitulo = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
-                        var btnDeletar = document.createElement("button");
-
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
-
-                        divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
-
-                        divButtons.className = "div-buttons"
-
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idAviso;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
-                        feed.appendChild(divPublicacao);
-                    }
-
-                    finalizarAguardar();
+                    
                 });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
             finalizarAguardar();
-        });
-    }
 
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      return false; 
+}
+var timeout = setTimeout(function criar_select(){ 
+   if (baralho_grafico.length == 0){
+    div_select.innerHTML = `<span>Nenhum baralho cadastrado</span>`
+   }else{
+   for(var cont = 0; cont < baralho_grafico.length; cont ++){
+   console.log('estou no for')
+   var nome_deck = nome_grafico[cont]
+   var formato = formato_grafico[cont]
+    div_select.innerHTML += `
+    <span>Baralho: ${cont + 1} Nome: ${nome_deck} Formato: ${formato} </span> <br>
+   `
+   }
+   }
+}
+   ,200)
+
+
+  function cadastrar_resultado(){
+    //validações:
+    var metrica_nome1 = 0
+    var metrica_nome2 = 0
+    var idBaralho = ``
+    var nome = nome_input.value
+    var vitorias = vitorias_input.value
+    var derrotas = derrotas_input.value
+    var empates = empate_input.value
+    var baralho_tamanho = baralho_grafico.length
+    for (cont = 0; cont < baralho_tamanho; cont ++){
+    var nome_correto = nome_grafico[cont]
+    if (nome != nome_correto){
+    metrica_nome1 = 1
+    }
+    if (nome == nome_correto){
+    metrica_nome2 = 1
+    idBaralho = baralho_grafico[cont]
+    }
+}
+    if (metrica_nome1 != metrica_nome2) {
+    alert('O deck não existe')
+    }else if(vitorias < 0 || derrotas < 0 || empates < 0){
+    alert('Vitorias, derrotas ou empates não podem ser negativos')
+    }else{
+        fetch("/deck/cadastrar_resultado", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nome,
+          vitoriasServer: vitorias,
+          derrotasServer: derrotas,
+          empatesServer: empates,
+          idBaralhoServer: idBaralho,
+        }),
+      })
+      setTimeout (chamar, 200)
+    }
+    }
+  
 </script>

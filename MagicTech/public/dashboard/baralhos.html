@@ -29,7 +29,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="chamar(), exibirBaralhos()">
+<body onload="chamar(), timeout">
 
     <div class="janela">
 
@@ -67,12 +67,13 @@
 
 </body>
 
-<script>
-    var baralho_grafico = [];
+
+ <script>
+var baralho_grafico = [];
     var formato_grafico = [];
     var nome_grafico = [];
     var cores_grafico = [];
-function chamar(){
+    function chamar(){
     fetch("/deck/chamar_baralho", {
             method: "POST",
             headers: {
@@ -118,11 +119,13 @@ function chamar(){
       return false; 
 }
 
-function exibirBaralhos() {
+var timeout = setTimeout(function exibirBaralhos() {
     var div_conteudo = ``;
-    for (var cont = 0; cont < baralho_grafico.length; cont++){
+    console.log('entrei na funcao')
+    for (var cont = 1; cont < baralho_grafico.length + 1; cont++){
+        console.log(`${cont}`)
         alert(cont);
-        div_conteudo += `
+        div_conteudo.innerHTML += `
         <section>
             <canvas id='grafico${cont}'></canvas>
         </section>`;
@@ -148,7 +151,8 @@ function exibirBaralhos() {
             }
         )
     }
-}
+}, 200)
+
      
 
 </script>
