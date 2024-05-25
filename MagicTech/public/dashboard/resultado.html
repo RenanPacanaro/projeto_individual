@@ -106,6 +106,7 @@
 </html>
 
 <script>
+
   var baralho_grafico = [];
   var formato_grafico = [];
   var nome_grafico = [];
@@ -176,13 +177,13 @@
 
   function cadastrar_resultado() {
     //validações:
+    var vitorias_corretas = 0
+    var derrotas_corretas = 0
+    var empates_corretos = 0
     var metrica_nome1 = 0
     var metrica_nome2 = 0
     var idBaralho = ``
     var nome = nome_input.value
-    var vitorias_corretas = 0
-    var derrotas_corretas = 0
-    var empates_corretos = 0
     var vitorias = Number(vitorias_input.value)
     var derrotas = Number(derrotas_input.value)
     var empates = Number(empate_input.value)
@@ -204,20 +205,22 @@
       alert('O deck não existe')
     } else if (vitorias < 0 || derrotas < 0 || empates < 0) {
       alert('Vitorias, derrotas ou empates não podem ser negativos')
-    } else {
-      var vitorias_enviar = vitorias + vitorias_corretas
-      var derrotas_enviar = derrotas + derrotas_corretas
-      var empates_enviar = empates + empates_corretos
-
+    } else if (vitorias_grafico.length == 0 )  {
+      var vitorias_enviar1 = vitorias 
+      var derrotas_enviar1 = derrotas 
+      var empates_enviar1 = empates 
       console.log(vitorias);
       console.log(derrotas);
       console.log(empates);
       console.log(vitorias_corretas);
       console.log(derrotas_corretas);
       console.log(empates_corretos);
-      console.log(vitorias_enviar);
-      console.log(derrotas_enviar);
-      console.log(empates_enviar);
+      console.log(vitorias_enviar1);
+      console.log(derrotas_enviar1);
+      console.log(empates_enviar1);
+      console.log(vitorias_enviar2);
+      console.log(derrotas_enviar2);
+      console.log(empates_enviar2);
       fetch("/deck/cadastrar_resultado", {
         method: "POST",
         headers: {
@@ -227,9 +230,43 @@
           // crie um atributo que recebe o valor recuperado aqui
           // Agora vá para o arquivo routes/usuario.js
           nomeServer: nome,
-          vitoriasServer: vitorias_enviar,
-          derrotasServer: derrotas_enviar,
-          empatesServer: empates_enviar,
+          vitoriasServer: vitorias_enviar1,
+          derrotasServer: derrotas_enviar1,
+          empatesServer: empates_enviar1,
+          idBaralhoServer: idBaralho,
+        }),
+      })
+      setTimeout(chamar, 200)
+    }
+    else if (vitorias_grafico.length > 0){
+      var vitorias_enviar2 = vitorias + vitorias_corretas
+      var derrotas_enviar2 = derrotas + derrotas_corretas
+      var empates_enviar2 = empates + empates_corretos
+
+      console.log(vitorias);
+      console.log(derrotas);
+      console.log(empates);
+      console.log(vitorias_corretas);
+      console.log(derrotas_corretas);
+      console.log(empates_corretos);
+      console.log(vitorias_enviar1);
+      console.log(derrotas_enviar1);
+      console.log(empates_enviar1);
+      console.log(vitorias_enviar2);
+      console.log(derrotas_enviar2);
+      console.log(empates_enviar2);
+      fetch("/deck/cadastrar_resultado", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nome,
+          vitoriasServer: vitorias_enviar2,
+          derrotasServer: derrotas_enviar2,
+          empatesServer: empates_enviar2,
           idBaralhoServer: idBaralho,
         }),
       })
