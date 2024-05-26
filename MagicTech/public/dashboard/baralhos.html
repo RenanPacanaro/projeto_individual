@@ -17,7 +17,6 @@
                 user-select: none;
             }
         </style>
-
     <link rel="stylesheet" href="./../css/dashboards.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
 
@@ -29,50 +28,72 @@
         rel="stylesheet">
 </head>
 
-<body onload="chamar(), chamar_resultado(), timeout">
+<body onload="chamar(), chamar_resultado(), timeout" style="background-color: #161618;">
 
-    <div class="janela">
+   <!--header inicio-->
+   <div class="header">
+    <div class="container">
+      <h1 class="titulo">AquaTech</h1>
+    </div>
+  </div>
+  <!--header fim-->
 
-        <div class="header-left dash-header">
-
-            <h1>AquaTech</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+  <div class="login">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="container">
+    
+        <div class="janela">
+    
+    
+            <div class="header-left">
+    
+                <h1>AquaTech</h1>
+    
+                <div class="hello">
+                    <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                </div>
+    
+                <div class="btn-nav-white">
+                    <a href="./baralhos.html">
+                        <h3>Baralhos</h3>
+                    </a>
+                </div>
+    
+                <div class="btn-nav-white">
+                    <a href="./cadastro_deck.html">
+                        <h3>Cadastrar</h3>
+                    </a>
+                </div>
+    
+                <div class="btn-nav-white">
+                    <a href="./resultado.html">
+                        <h3>Resultados</h3>
+                    </a>
+                </div>
+    
+                <div class="btn-logout" onclick="limparSessao()">
+                    <h3>Sair</h3>
+                </div>
+    
             </div>
-
-            <div class="btn-nav">
-                <h3>Baralhos</h3>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./cadastro_deck.html">
-                    <h3>Cadastrar</h3>
-                </a>
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./resultado.html">
-                    <h3>Resultados</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
-        </div>
-        <div id="div_graficos"></div>
-
-
+    
+      <div class="card3">
+            <div id="div_graficos" class="grafico"></div>
+    </div>
+  </div>
 </body>
-
-
  <script>
-var baralho_grafico = [];
-    var formato_grafico = [];
-    var nome_grafico = [];
-    var cores_grafico = [];
+ var baralho_grafico = [];
+  var formato_grafico = [];
+  var nome_grafico = [];
+  var cores_grafico = [];
+  var vitorias_grafico = [];
+  var derrotas_grafico = [];
+  var empates_grafico = [];
     function chamar(){
     fetch("/deck/chamar_baralho", {
             method: "POST",
@@ -119,7 +140,6 @@ var baralho_grafico = [];
       return false; 
 }
 function chamar_resultado(){
-    function chamar_resultado() {
     fetch("/deck/chamar_resultado", {
       method: "POST",
       headers: {
@@ -161,21 +181,25 @@ function chamar_resultado(){
 
     return false;
   }
-}
 
 var timeout = setTimeout(function exibirBaralhos() {
     console.log('entrei na funcao')
-    for (var cont = 1; cont < baralho_grafico.length + 1; cont++){
+    for (var cont = 0; cont < baralho_grafico.length ; cont++){
+        var nome = nome_grafico[cont]
+        var vitorias = vitorias_grafico[cont]
+        var derrotas = derrotas_grafico[cont]
+        var empates = empates_grafico[cont]
         console.log(`${cont}`)
         console.log(cont);
+        
         div_graficos.innerHTML += `
         <section>
             <canvas id='grafico${cont}'></canvas>
         </section>`;
 
         var grafico_canvas = document.getElementById(`grafico${cont}`).getContext('2d');
-        grafico_canvas.canvas.parentNode.style.width = '500px';
-        grafico_canvas.canvas.parentNode.style.height = '500px';
+        grafico_canvas.canvas.parentNode.style.width = '300px';
+        grafico_canvas.canvas.parentNode.style.height = '300px';
         grafico_canvas.canvas.width = 1;
         grafico_canvas.canvas.height = 1;
 
@@ -183,11 +207,11 @@ var timeout = setTimeout(function exibirBaralhos() {
             grafico_canvas, {
                 type: 'pie',
                 data:{
-                    labels: ['Vitorias', 'Derrotas'],
+                    labels: ['Vitorias', 'Derrotas', 'Empates'],
                     datasets: [{
-                        data: [50,50],
+                        data: [vitorias,derrotas, empates],
                         backgroundColor:[
-                            'blue', 'red'
+                            'blue', 'red', 'gray'
                         ]
                     }]
                 }

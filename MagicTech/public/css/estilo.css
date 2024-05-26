@@ -199,6 +199,16 @@ body {
   height: fit-content;
   padding: 20px 0;
 }
+.card2 {
+  width: 50vw;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: black;
+  flex-direction: column;
+  height: fit-content;
+}
 
 
 .card h2 {
@@ -416,4 +426,7 @@ input {
 .formulario .campo .resultado_deck {
   font-size: 20px;
   color: black;
+}
+.grafico{
+  display: flex;
 }
