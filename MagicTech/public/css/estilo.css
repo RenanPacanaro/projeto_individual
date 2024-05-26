@@ -432,6 +432,7 @@ input {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  margin: 10px;
 }
 .span_grafico{
   color: #fff;
