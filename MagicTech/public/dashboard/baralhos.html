@@ -29,7 +29,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="chamar(), timeout">
+<body onload="chamar(), chamar_resultado(), timeout">
 
     <div class="janela">
 
@@ -118,12 +118,56 @@ var baralho_grafico = [];
 
       return false; 
 }
+function chamar_resultado(){
+    function chamar_resultado() {
+    fetch("/deck/chamar_resultado", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id_UsuarioServer: sessionStorage.ID_USUARIO
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          console.log(json.resultadoChamar_resultado[0])
+          for (var cont = 0; cont <= json.resultadoChamar_resultado.length - 1; cont++) {
+            var resultado_lista = json.resultadoChamar_resultado[cont];
+            var vitorias = resultado_lista.vitorias;
+            var derrotas = resultado_lista.derrotas;
+            var empates = resultado_lista.empates;
+            vitorias_grafico.push(vitorias);
+            derrotas_grafico.push(derrotas)
+            empates_grafico.push(empates)
+          }
+
+        });
+        finalizarAguardar();
+
+      } else {
+        throw "Houve um erro ao tentar realizar o cadastro!";
+      }
+    })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+}
 
 var timeout = setTimeout(function exibirBaralhos() {
     console.log('entrei na funcao')
     for (var cont = 1; cont < baralho_grafico.length + 1; cont++){
         console.log(`${cont}`)
-        alert(cont);
+        console.log(cont);
         div_graficos.innerHTML += `
         <section>
             <canvas id='grafico${cont}'></canvas>

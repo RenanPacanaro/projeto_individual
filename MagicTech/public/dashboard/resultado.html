@@ -205,7 +205,7 @@
       alert('O deck não existe')
     } else if (vitorias < 0 || derrotas < 0 || empates < 0) {
       alert('Vitorias, derrotas ou empates não podem ser negativos')
-    } else if (vitorias_grafico.length == 0 )  {
+    } else if (isNaN(vitorias_corretas))  {
       var vitorias_enviar1 = vitorias 
       var derrotas_enviar1 = derrotas 
       var empates_enviar1 = empates 
@@ -238,7 +238,7 @@
       })
       setTimeout(chamar, 200)
     }
-    else if (vitorias_grafico.length > 0){
+    else if (vitorias_corretas > 0){
       var vitorias_enviar2 = vitorias + vitorias_corretas
       var derrotas_enviar2 = derrotas + derrotas_corretas
       var empates_enviar2 = empates + empates_corretos
