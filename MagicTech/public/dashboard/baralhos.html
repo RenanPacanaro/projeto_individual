@@ -187,13 +187,14 @@ var timeout = setTimeout(function exibirBaralhos() {
     
     for (var cont = 0; cont < baralho_grafico.length ; cont++){
         div_graficos.innerHTML += `
+        <span class='span_grafico'> Nome do deck: ${nome_grafico[cont]}    Formato: ${formato_grafico[cont]}</span>
         <section>
             <canvas id='grafico${cont}'></canvas>
         </section>`;
 
         var grafico_canvas = document.getElementById(`grafico${cont}`).getContext('2d');
-        grafico_canvas.canvas.parentNode.style.width = '300px';
-        grafico_canvas.canvas.parentNode.style.height = '300px';
+        grafico_canvas.canvas.parentNode.style.width = '15vw';
+        grafico_canvas.canvas.parentNode.style.height = '20vh';
         grafico_canvas.canvas.width = 1;
         grafico_canvas.canvas.height = 1;
       }
