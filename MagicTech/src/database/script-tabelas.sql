@@ -28,8 +28,9 @@ primary key pkcomposta (idCor, fk_baralho),
 
 create table resultado (
 	idResultado INT AUTO_INCREMENT,
-    derrotas int,
     vitorias int,
+    derrotas int,
+    empates int,
     fk_baralho int not null,
     primary key pkcomposta (idResultado, fk_baralho),
 	FOREIGN KEY (fk_baralho) REFERENCES baralho (idBaralho));
@@ -39,3 +40,6 @@ insert into usuario values
 select * from usuario;
 select * from baralho;
 select * from cor;
+select * from resultado;
+select idBaralho, max(vitorias) as vitorias, max(derrotas) as derrotas, max(empates) as empates from resultado join baralho on resultado.fk_baralho = baralho.idBaralho 
+    WHERE baralho.fk_Usuario = 1 group by idBaralho;
