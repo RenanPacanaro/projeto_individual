@@ -17,9 +17,8 @@
                 user-select: none;
             }
         </style>
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-
+    <link rel="stylesheet" href="./../css/baralhos.css">
+  
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -29,15 +28,11 @@
 </head>
 
 <body onload="chamar(), chamar_resultado(), timeout" style="background-color: #161618;">
-
-   <!--header inicio-->
-   <div class="header">
+  <div class="header">
     <div class="container">
-      <h1 class="titulo">AquaTech</h1>
+      <h1 class="titulo" style="color: white;">Vitorias, derrotas e empates em porcentagem:</h1>
     </div>
   </div>
-  <!--header fim-->
-
   <div class="login">
     <div class="alerta_erro">
       <div class="card_erro" id="cardErro">
@@ -84,9 +79,6 @@
       <div class="card3">
             <div id="div_graficos" class="grafico"></div>
     </div>
-    <div class="card3">
-      <div id="div_graficos2" class="grafico"></div>
-</div>
   </div>
 </body>
  <script>
@@ -190,34 +182,20 @@ var timeout = setTimeout(function exibirBaralhos() {
     
     for (var cont = 0; cont < baralho_grafico.length ; cont++){
       var resto = cont % 2
-      if (resto != 0) {
-        div_graficos.innerHTML += `
+        div_graficos.innerHTML += `<div id="div_${cont}" class = "grafico2">
         <span class='span_grafico'> Nome do deck: ${nome_grafico[cont]}</span><br>
-        <span class='span_grafico'>Formato: ${formato_grafico[cont]}</span>
+        <span class='span_grafico'>Formato: ${formato_grafico[cont]}</span><br>
+        <span class='span_grafico'>Total de vitorias: ${vitorias_grafico[cont]}</span><br>
         <section>
             <canvas id='grafico${cont}'></canvas>
-        </section>`;
+        </section>
+        </div>`;
 
         var grafico_canvas = document.getElementById(`grafico${cont}`).getContext('2d');
-        grafico_canvas.canvas.parentNode.style.width = '200px';
-        grafico_canvas.canvas.parentNode.style.height = '200px';
+        grafico_canvas.canvas.parentNode.style.width = '300px';
+        grafico_canvas.canvas.parentNode.style.height = '100%';
         grafico_canvas.canvas.width = 1;
         grafico_canvas.canvas.height = 1;
-      }
-      if (resto == 0){
-        div_graficos2.innerHTML += `
-        <span class='span_grafico'> Nome do deck: ${nome_grafico[cont]}</span><br>
-        <span class='span_grafico'>Formato: ${formato_grafico[cont]}</span>
-        <section>
-            <canvas id='grafico${cont}'></canvas>
-        </section>`;
-
-        var grafico_canvas = document.getElementById(`grafico${cont}`).getContext('2d');
-        grafico_canvas.canvas.parentNode.style.width = '200px';
-        grafico_canvas.canvas.parentNode.style.height = '200px';
-        grafico_canvas.canvas.width = 1;
-        grafico_canvas.canvas.height = 1;
-      }
       }
         for (var cont = 0; cont < baralho_grafico.length; cont ++){
         console.log(vitorias, derrotas, empates);
