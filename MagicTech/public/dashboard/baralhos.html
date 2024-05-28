@@ -40,13 +40,9 @@
       </div>
     </div>
     <div class="container">
-    
-        <div class="janela">
-    
-    
             <div class="header-left">
     
-                <h1>AquaTech</h1>
+                <h1>MagicTech</h1>
     
                 <div class="hello">
                     <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
@@ -75,20 +71,18 @@
                 </div>
     
             </div>
-    
-      <div class="card3">
             <div id="div_graficos" class="grafico"></div>
-    </div>
-  </div>
 </body>
  <script>
- var baralho_grafico = [];
+  var baralho_grafico = [];
   var formato_grafico = [];
   var nome_grafico = [];
   var cores_grafico = [];
   var vitorias_grafico = [];
   var derrotas_grafico = [];
   var empates_grafico = [];
+  function nada(){
+  }
     function chamar(){
     fetch("/deck/chamar_baralho", {
             method: "POST",
@@ -179,21 +173,24 @@ function chamar_resultado(){
 
 var timeout = setTimeout(function exibirBaralhos() {
     console.log('entrei na funcao')
-    
     for (var cont = 0; cont < baralho_grafico.length ; cont++){
       var resto = cont % 2
         div_graficos.innerHTML += `<div id="div_${cont}" class = "grafico2">
-        <span class='span_grafico'> Nome do deck: ${nome_grafico[cont]}</span><br>
-        <span class='span_grafico'>Formato: ${formato_grafico[cont]}</span><br>
-        <span class='span_grafico'>Total de vitorias: ${vitorias_grafico[cont]}</span><br>
         <section>
             <canvas id='grafico${cont}'></canvas>
         </section>
+        <div id="div_span" class = "span_grafico_div">
+        <span class='span_grafico'>Deck: ${nome_grafico[cont]}</span><br>
+        <span class='span_grafico'>Formato: ${formato_grafico[cont]}</span><br>
+        <span class='span_grafico'>Total de vitorias: ${vitorias_grafico[cont]}</span><br>
+        <span class='span_grafico'>Total de derrotas: ${derrotas_grafico[cont]}</span><br>
+        <span class='span_grafico'>Total de empates: ${empates_grafico[cont]}</span><br>
+        </div>
         </div>`;
 
         var grafico_canvas = document.getElementById(`grafico${cont}`).getContext('2d');
-        grafico_canvas.canvas.parentNode.style.width = '300px';
-        grafico_canvas.canvas.parentNode.style.height = '100%';
+        grafico_canvas.canvas.parentNode.style.width = '400px';
+        grafico_canvas.canvas.parentNode.style.height = '400px';
         grafico_canvas.canvas.width = 1;
         grafico_canvas.canvas.height = 1;
       }
@@ -219,11 +216,20 @@ var timeout = setTimeout(function exibirBaralhos() {
                     datasets: [{
                         data: [vitoriaspercent,derrotaspercent, empatespercent],
                         backgroundColor:[
-                            'blue', 'red', 'gray'
-                        ]
-                    }]
-                }
-            }
+                            'blue', 'red', 'gray'],
+                    },
+                  ],
+                },
+                options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: "white",
+              },
+            },
+          },
+        },
+              }
         )
     }
 }, 200)
