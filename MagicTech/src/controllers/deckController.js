@@ -11,8 +11,6 @@ function cadastrar(req, res) {
     } else if (formato == undefined) {
         res.status(400).send("O formato do deck está undefined!");
     } else {
-
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         deckModel.cadastrar(nome, formato, id_Usuario)
             .then(
                 function (resultado) {

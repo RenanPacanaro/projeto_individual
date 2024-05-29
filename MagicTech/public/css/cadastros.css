@@ -93,12 +93,18 @@
     cursor: pointer;
   }
 
-body {
+  body {
     margin: 0;
     padding: 0;
     font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: black;
+    background-size: cover;
+    background-image: url('../assets/imgs/magic_banner.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
+  
   
   :root {
     --tamanho-header: 80px;
@@ -231,8 +237,6 @@ body {
   }
   .login {
     height: 100vh;
-    background-image: url('../assets/imgs/magic_banner.jpg');
-    background-size: cover;
   }
   
   .login .container {

@@ -9,35 +9,36 @@
   <title>AquaTech | Cadastro</title>
 
   <script src="./js/sessao.js"></script>
-
   <link rel="stylesheet" href="./../css/login.css" />
   <link rel="icon" href="./assets/icon/favicon2.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
 <body>
-  <!--header inicio-->
+
   <div class="header">
     <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>
-          <a href="sobre-mim.html">Sobre-mim</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
+        <div class="cleber">
+            <div class="logo"><img src="..\assets\imgs\MagicTechLogo.png"></div>
+            <h1 class="titulo">MagicTech</h1>
+            </div>
+        <ul class="navbar">
+            <li>
+                <a href="index.html">Inicial</a>
+            </li>
+            <li>
+                <a href="sobre-mim.html">Sobre-mim</a>
+            </li>
+            <li>|</li>
+            <li class="agora">
+                <a href="#">Login</a>
+            </li>
+            <li>
+                <a href="cadastro.html">Cadastro</a>
+            </li>
+        </ul>
     </div>
-  </div>
-  <!--header fim-->
+</div>
 
   <div class="login">
     <div class="alerta_erro">
@@ -49,10 +50,6 @@
       <div class="card">
         <h2>Bem-vindo!</h2>
         <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
           <div class="campo">
             <span>Nome:</span>
             <input id="nome_input" type="text" placeholder="Seu nome" />
@@ -93,9 +90,6 @@
 <script>
   function cadastrar() {
     aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
@@ -116,16 +110,12 @@
     } else {
       setInterval(sumirMensagem, 5000);
     }
-
-    // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar
