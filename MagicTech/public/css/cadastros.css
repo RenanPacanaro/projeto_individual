@@ -254,3 +254,12 @@
   .checkbox2 input{
     padding: 40px;
     }
+  .correto{
+    margin-top: 3vh;
+    font-size: 20px;
+  }
+  .correto2{
+    margin-top: 3vh;
+    font-size: 20px;
+    margin-left: 10vw;
+  }

@@ -30,11 +30,11 @@
                 <a href="sobre-mim.html">Sobre-mim</a>
             </li>
             <li>|</li>
-            <li class="agora">
-                <a href="#">Login</a>
-            </li>
+                <a href="login.html">Login</a>
             <li>
-                <a href="cadastro.html">Cadastro</a>
+              <li class="agora">
+                <a href="#">Cadastro</a>
+              </li>
             </li>
         </ul>
     </div>
@@ -94,20 +94,20 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-  
+    var emailindexarroba = emailVar.indexOf('@')
+    var emailindexponto = emailVar.indexOf('.')
+    var emailindexpontocom = emailVar.indexOf('.com')
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == ""
     ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
-
-      finalizarAguardar();
+     alert(`Algum campo está em branco`)
       return false;
-    } else {
+    } else if(emailindexarroba == -1 || emailindexponto == -1 || emailindexpontocom == -1 ) 
+    { alert(`Email Invalido`)
+      return false;}else{
       setInterval(sumirMensagem, 5000);
     }
     fetch("/usuarios/cadastrar", {

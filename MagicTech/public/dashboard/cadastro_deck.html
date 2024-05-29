@@ -85,7 +85,7 @@
             </div>
             <button class="botao" onclick="cadastrar()">Cadastrar</button>
           </div>
-          <div id="div_correto"></div>
+          <div id="div_correto" class="correto"></div>
         </div>
     </div>
   </div>
@@ -130,6 +130,7 @@
         coresServer: cores,
       }),
     })
+    div_correto.innerHTML = `<h3> Baralho cadastrado com sucesso! <h3>`
     setTimeout(chamar, 200)
     function chamar() {
       fetch("/deck/chamar_baralho", {

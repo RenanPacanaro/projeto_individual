@@ -73,10 +73,11 @@
               <span>Empates:</span>
               <input id="empate_input" type="text" placeholder="Numero de empates" />
             </div>
+            <button class="botao2" onclick="cadastrar_resultado()">Cadastrar Resultado</button>
+            <div id="div_correto" class="correto2"></div>
           </div>
-          <button class="botao2" onclick="cadastrar_resultado()">Cadastrar Resultado</button>
         </div>
-        <div id="div_erros_login"></div>
+        
       </div>
     </div>
   </div>
@@ -146,7 +147,7 @@
         var nome_deck = nome_grafico[cont]
         var formato = formato_grafico[cont]
         div_select.innerHTML += `
-    <span>Baralho: ${cont + 1} Nome: ${nome_deck} Formato: ${formato} </span> <br>
+    <span>Baralho: ${cont + 1}   | Nome: ${nome_deck}    | Formato: ${formato} </span> <br>
    `
       }
     }
@@ -251,6 +252,7 @@
       })
       setTimeout(chamar, 200)
     }
+    div_correto.innerHTML = `<h3> Resultados cadastrados com sucesso! <h3>`
   }
 
   function chamar_resultado() {
