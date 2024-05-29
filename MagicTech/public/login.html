@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="">
 
     <!--Header-->
 
@@ -87,7 +87,10 @@
 </html>
 
 <script>
-
+var baralho_grafico = [];
+var formato_grafico = [];
+var nome_grafico = [];
+var cores_grafico = [];
 
     function entrar() {
         aguardar();
@@ -156,5 +159,48 @@
     function sumirMensagem() {
         cardErro.style.display = "none"
     }
+    function chamar() {
+    fetch("/deck/chamar_baralho", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id_UsuarioServer: sessionStorage.ID_USUARIO
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
 
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          console.log(json.resultadoChamar_baralho[0].idBaralho)
+          for (var cont = 0; cont <= json.resultadoChamar_baralho.length - 1; cont++) {
+            var baralho_lista = json.resultadoChamar_baralho[cont];
+            var baralho = baralho_lista.idBaralho;
+            var nome = baralho_lista.nome;
+            var formato = baralho_lista.formato;
+            var cores = baralho_lista.cores;
+            baralho_grafico.push(baralho);
+            nome_grafico.push(nome)
+            formato_grafico.push(formato)
+            cores_grafico.push(cores)
+          }
+
+        });
+        finalizarAguardar();
+
+      } else {
+        throw "Houve um erro ao tentar realizar o cadastro!";
+      }
+    })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
 </script>

@@ -27,7 +27,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="chamar(), chamar_resultado(), timeout" style="background-color: #161618;">
+<body onload="chamar(), chamar_resultado(),nada(), timeout1, timeout2" style="background-color: #161618;">
   <div class="header">
     <div class="container">
       <h1 class="titulo" style="color: white;">Vitorias, derrotas e empates em porcentagem:</h1>
@@ -83,8 +83,13 @@
   var vitorias_grafico = [];
   var derrotas_grafico = [];
   var empates_grafico = [];
-  function nada(){
+ 
+  var timeout1 = setTimeout(function nada() {
+  var metrica_baralho = baralho_grafico.length
+  if(metrica_baralho == 0){
+    alert(` Nenhum Baralho Cadastrado até o momento`)
   }
+  }, 200)
     function chamar(){
     fetch("/deck/chamar_baralho", {
             method: "POST",
@@ -171,7 +176,7 @@ function chamar_resultado(){
     return false;
   }
 
-var timeout = setTimeout(function exibirBaralhos() {
+var timeout2 = setTimeout(function exibirBaralhos() {
     console.log('entrei na funcao')
     for (var cont = 0; cont < baralho_grafico.length ; cont++){
       var resto = cont % 2
